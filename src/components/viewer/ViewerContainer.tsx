@@ -6,12 +6,13 @@ import { useVisualizationStore } from "@/store/useVisualizationStore";
 import SceneBlueprintRenderer from "./SceneBlueprintRenderer";
 import ModelLoader from "./ModelLoader";
 import type { SceneBlueprint } from "@/types/api";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 export default function ViewerContainer() {
   const { result, loading } = useVisualizationStore();
   const [wireframe, setWireframe] = useState(false);
   const controlsRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const resetCamera = () => {
     if (controlsRef.current) {
@@ -19,8 +20,18 @@ export default function ViewerContainer() {
     }
   };
 
+  const toggleFullscreen = useCallback(() => {
+    if (!containerRef.current) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      containerRef.current.requestFullscreen();
+    }
+  }, []);
+
   return (
     <motion.div
+      ref={containerRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="glass-panel relative w-full h-full min-h-[400px] overflow-hidden"
@@ -43,7 +54,7 @@ export default function ViewerContainer() {
         <button onClick={() => setWireframe(!wireframe)} className={`p-2 rounded-lg transition-colors ${wireframe ? "bg-primary/20 text-primary" : "bg-background/60 hover:bg-background/80 text-muted-foreground hover:text-foreground"}`} title="Wireframe">
           <Box className="w-4 h-4" />
         </button>
-        <button className="p-2 bg-background/60 hover:bg-background/80 rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Fullscreen">
+        <button onClick={toggleFullscreen} className="p-2 bg-background/60 hover:bg-background/80 rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Fullscreen">
           <Maximize2 className="w-4 h-4" />
         </button>
       </div>

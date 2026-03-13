@@ -1,8 +1,9 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, Sparkles } from "lucide-react";
 import { useVisualizationStore } from "@/store/useVisualizationStore";
+import { useQueryHistoryStore } from "@/store/useQueryHistoryStore";
 import { visualizeConcept } from "@/utils/api";
 import ViewerContainer from "@/components/viewer/ViewerContainer";
 import PipelineVisualization from "@/components/panels/PipelineVisualization";
@@ -11,11 +12,13 @@ import ConfidencePanel from "@/components/panels/ConfidencePanel";
 import ExplanationPanel from "@/components/panels/ExplanationPanel";
 import MetricsPanel from "@/components/panels/MetricsPanel";
 import AccessibilityPanel from "@/components/panels/AccessibilityPanel";
-import { useState } from "react";
+import SceneInspectorPanel from "@/components/panels/SceneInspectorPanel";
+import QueryHistoryPanel from "@/components/panels/QueryHistoryPanel";
 
 export default function Workspace() {
   const navigate = useNavigate();
   const { query, setQuery, loading, setLoading, setResult, setPipelineSteps, result } = useVisualizationStore();
+  const { addQuery } = useQueryHistoryStore();
   const [searchInput, setSearchInput] = useState(query);
 
   const runVisualization = useCallback(async (q: string) => {
@@ -48,6 +51,7 @@ export default function Workspace() {
       { id: "render", label: "Rendering", status: "pending" },
     ]);
 
+    addQuery(q);
     const res = await visualizeConcept(q);
 
     setPipelineSteps([
@@ -126,7 +130,13 @@ export default function Workspace() {
           <CandidatePanel />
           <ConfidencePanel />
           <ExplanationPanel />
+          <SceneInspectorPanel />
           <MetricsPanel />
+          <QueryHistoryPanel onResubmit={(q) => {
+            setSearchInput(q);
+            setQuery(q);
+            runVisualization(q);
+          }} />
           <AccessibilityPanel />
         </div>
       </div>
