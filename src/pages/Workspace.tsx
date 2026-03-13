@@ -18,6 +18,7 @@ import QueryHistoryPanel from "@/components/panels/QueryHistoryPanel";
 export default function Workspace() {
   const navigate = useNavigate();
   const { query, setQuery, loading, setLoading, setResult, setPipelineSteps, result } = useVisualizationStore();
+  const { addQuery } = useQueryHistoryStore();
   const [searchInput, setSearchInput] = useState(query);
 
   const runVisualization = useCallback(async (q: string) => {
