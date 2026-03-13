@@ -54,7 +54,7 @@ export default function ViewerContainer() {
         <button onClick={() => setWireframe(!wireframe)} className={`p-2 rounded-lg transition-colors ${wireframe ? "bg-primary/20 text-primary" : "bg-background/60 hover:bg-background/80 text-muted-foreground hover:text-foreground"}`} title="Wireframe">
           <Box className="w-4 h-4" />
         </button>
-        <button className="p-2 bg-background/60 hover:bg-background/80 rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Fullscreen">
+        <button onClick={toggleFullscreen} className="p-2 bg-background/60 hover:bg-background/80 rounded-lg text-muted-foreground hover:text-foreground transition-colors" title="Fullscreen">
           <Maximize2 className="w-4 h-4" />
         </button>
       </div>

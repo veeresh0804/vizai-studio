@@ -130,7 +130,13 @@ export default function Workspace() {
           <CandidatePanel />
           <ConfidencePanel />
           <ExplanationPanel />
+          <SceneInspectorPanel />
           <MetricsPanel />
+          <QueryHistoryPanel onResubmit={(q) => {
+            setSearchInput(q);
+            setQuery(q);
+            runVisualization(q);
+          }} />
           <AccessibilityPanel />
         </div>
       </div>
