@@ -6,7 +6,7 @@ import { useVisualizationStore } from "@/store/useVisualizationStore";
 import SceneBlueprintRenderer from "./SceneBlueprintRenderer";
 import ModelLoader from "./ModelLoader";
 import type { SceneBlueprint } from "@/types/api";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 export default function ViewerContainer() {
   const { result, loading } = useVisualizationStore();
