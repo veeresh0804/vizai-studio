@@ -31,6 +31,7 @@ export default function ViewerContainer() {
 
   return (
     <motion.div
+      ref={containerRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="glass-panel relative w-full h-full min-h-[400px] overflow-hidden"
