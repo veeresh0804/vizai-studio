@@ -12,12 +12,22 @@ export default function ViewerContainer() {
   const { result, loading } = useVisualizationStore();
   const [wireframe, setWireframe] = useState(false);
   const controlsRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const resetCamera = () => {
     if (controlsRef.current) {
       controlsRef.current.reset();
     }
   };
+
+  const toggleFullscreen = useCallback(() => {
+    if (!containerRef.current) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      containerRef.current.requestFullscreen();
+    }
+  }, []);
 
   return (
     <motion.div
