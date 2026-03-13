@@ -51,6 +51,7 @@ export default function Workspace() {
       { id: "render", label: "Rendering", status: "pending" },
     ]);
 
+    addQuery(q);
     const res = await visualizeConcept(q);
 
     setPipelineSteps([
