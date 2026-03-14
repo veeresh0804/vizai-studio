@@ -35,7 +35,7 @@ export default function ViewerContainer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="glass-panel relative w-full h-full min-h-[400px] overflow-hidden"
-    >
+      style={{ height: "100%" }}>
       <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
         <span className="text-xs font-mono text-muted-foreground bg-background/60 px-2 py-1 rounded">
           3D Visualization Viewer
