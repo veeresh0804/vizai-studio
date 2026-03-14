@@ -27,6 +27,25 @@ export interface SceneAsset {
   scale?: [number, number, number];
 }
 
+export interface SceneLabel {
+  name: string;
+  position: [number, number, number];
+  description: string;
+  audio?: string;
+}
+
+export interface VisualizeResponse {
+  success: boolean;
+  type: "glb" | "scene";
+  data: { url: string } | SceneBlueprint;
+  explanation: string;
+  processingTime: number;
+  source: "search" | "generated";
+  candidates?: CandidateModel[];
+  confidence?: number;
+  labels?: SceneLabel[];
+}
+
 export interface VisualizeResponse {
   success: boolean;
   type: "glb" | "scene";
