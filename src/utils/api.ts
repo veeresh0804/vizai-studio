@@ -65,5 +65,17 @@ export async function visualizeConcept(query: string): Promise<VisualizeResponse
       { name: `${query} Educational`, confidence: 0.65, source: "Generated" },
     ],
     confidence: isKnown ? 0.83 : 0.67,
+    labels: isKnown
+      ? [
+          { name: "Sun", position: [0, 1.8, 0] as [number, number, number], description: "The Sun is a giant ball of hot gas! It gives light and warmth to all the planets." },
+          { name: "Earth", position: [4.8, 0.8, -0.3] as [number, number, number], description: "Earth is our home! It has oceans, mountains, and is the only planet we know has life." },
+          { name: "Mars", position: [6, 0.6, 0.8] as [number, number, number], description: "Mars is called the Red Planet because of its rusty red color. Maybe humans will visit someday!" },
+          { name: "Jupiter", position: [8, 1.2, -0.5] as [number, number, number], description: "Jupiter is the biggest planet! It has a giant storm called the Great Red Spot." },
+          { name: "Saturn Ring", position: [10, 1, 0.3] as [number, number, number], description: "Saturn has beautiful rings made of ice and rock pieces orbiting around it!" },
+        ]
+      : [
+          { name: "Core", position: [0, 1, 0] as [number, number, number], description: "This is the central element of the visualization." },
+          { name: "Node A", position: [2, 1.8, 0] as [number, number, number], description: "A connected node representing a related concept." },
+        ],
   };
 }
