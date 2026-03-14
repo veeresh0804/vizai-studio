@@ -56,5 +56,5 @@ export const useVisualizationStore = create<VisualizationState>((set) => ({
     })),
   toggleHighContrast: () => set((s) => ({ highContrast: !s.highContrast })),
   toggleSimplifiedGeometry: () => set((s) => ({ simplifiedGeometry: !s.simplifiedGeometry })),
-  reset: () => set({ query: "", loading: false, result: null, selectedCandidate: 0, pipelineSteps: defaultPipeline }),
+  reset: () => set({ query: "", loading: false, result: null, selectedCandidate: 0, pipelineSteps: defaultPipeline, highContrast: false, simplifiedGeometry: false }),
 }));
