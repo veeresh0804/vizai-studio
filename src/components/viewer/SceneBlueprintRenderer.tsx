@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import type { SceneBlueprint, ScenePrimitive } from "@/types/api";
+import type { SceneBlueprint, ScenePrimitive, SceneLabel } from "@/types/api";
 import * as THREE from "three";
+import Label3D from "./Label3D";
 
 function PrimitiveComponent({ primitive }: { primitive: ScenePrimitive }) {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -34,9 +35,10 @@ function PrimitiveComponent({ primitive }: { primitive: ScenePrimitive }) {
 
 interface Props {
   blueprint: SceneBlueprint;
+  labels?: SceneLabel[];
 }
 
-export default function SceneBlueprintRenderer({ blueprint }: Props) {
+export default function SceneBlueprintRenderer({ blueprint, labels }: Props) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -60,6 +62,9 @@ export default function SceneBlueprintRenderer({ blueprint }: Props) {
       />
       {blueprint.primitives.map((p, i) => (
         <PrimitiveComponent key={i} primitive={p} />
+      ))}
+      {labels?.map((l, i) => (
+        <Label3D key={i} label={l} />
       ))}
     </group>
   );
