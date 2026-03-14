@@ -115,12 +115,13 @@ export default function Workspace() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-4 flex flex-col lg:flex-row gap-4">
+      <div className="flex-1 p-4 flex flex-col lg:flex-row gap-4 overflow-hidden">
         {/* 3D Viewer */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex-1 min-h-[400px] lg:min-h-0"
+          className="flex-1 lg:min-h-0"
+          style={{ minHeight: "400px", height: "calc(100vh - 160px)" }}
         >
           <ViewerContainer />
         </motion.div>
