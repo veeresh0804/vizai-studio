@@ -77,7 +77,7 @@ export default function ViewerContainer() {
             <Grid infiniteGrid fadeDistance={20} cellColor="#1e293b" sectionColor="#334155" />
           </>
         )}
-        {result?.type === "scene" && <SceneBlueprintRenderer blueprint={result.data as SceneBlueprint} />}
+        {result?.type === "scene" && <SceneBlueprintRenderer blueprint={result.data as SceneBlueprint} labels={result.labels} />}
         {result?.type === "glb" && <ModelLoader modelUrl={(result.data as { url: string }).url} />}
       </Canvas>
 
